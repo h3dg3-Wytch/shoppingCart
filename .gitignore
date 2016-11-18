@@ -1,6 +1,6 @@
 *.class
 
-idea
+.idea
 build
 
 # BlueJ files
