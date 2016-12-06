@@ -10,24 +10,15 @@
 
     <context-param>
         <param-name>dbURL</param-name>
-        <param-value>jdbc:mysql://localhost/jdbc</param-value>
+        <param-value>jdbc:mysql://localhost/3306/shoppingCart</param-value>
     </context-param>
     <context-param>
         <param-name>dbUser</param-name>
-        <param-value>root</param-value>
+        <param-value>developer</param-value>
     </context-param>
     <context-param>
         <param-name>dbUserPwd</param-name>
-        <param-value>th3m4g1321</param-value>
+        <param-value>password</param-value>
     </context-param>
 
-    <servlet>
-        <servlet-name>HelloServer</servlet-name>
-        <servlet-class>com.h3dg3wytch.HelloServer</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>HelloServer</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
 </web-app>

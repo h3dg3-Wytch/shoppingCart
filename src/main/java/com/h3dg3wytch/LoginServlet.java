@@ -1,5 +1,7 @@
 package com.h3dg3wytch;
 
+import com.h3dg3wytch.database.DBConnectionManager;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -9,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.*;
+import java.sql.Date;
+import java.util.*;
+import com.mysql.cj.jdbc.Driver;
 
 /**
  * Created by h3dg3wytch on 12/3/16.
@@ -18,38 +24,149 @@ public class LoginServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
+    public static final String HTML_START="<html><body>";
+    public static final String HTML_END="</body></html>";
+
+    // JDBC driver name and database URL
+    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+    static final String DB_URL="jdbc:mysql://localhost/shoppingCart";
+
+    //Database creditionals
+    static final String USER = "developer";
+    static final String PASSWORD ="password";
+
+    private DBConnectionManager connectionManager;
+
+
     public void init() throws ServletException {
-        //we can create DB connection resource here and set it to Servlet context
-        if (getServletContext().getInitParameter("dbURL").equals("jdbc:mysql://localhost/mysql_db") &&
-                getServletContext().getInitParameter("dbUser").equals("mysql_user") &&
-                getServletContext().getInitParameter("dbUserPwd").equals("mysql_pwd"))
-            getServletContext().setAttribute("DB_Success", "True");
 
-        else throw new ServletException("DB Connection error");
+
 
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, IOException {
 
-        //get request parameters for userID and password
-        String user = request.getParameter("user");
-        String pwd = request.getParameter("pwd");
+        Connection connection = null;
+        Statement statement = null;
 
-        //get servlet config init params
-        String userID = getServletConfig().getInitParameter("user");
-        String password = getServletConfig().getInitParameter("password");
-        //logging example
-        log("User="+user+"::password="+pwd);
+        PrintWriter out = response.getWriter();
+        out.print(HTML_START);
+        out.print("<h1>Login</h1>");
+        try{
+            //Step 2: register JDBC driver
+            try {
+                Class.forName(JDBC_DRIVER).newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
 
-        if(userID.equals(user) && password.equals(pwd)){
-            response.sendRedirect("LoginSuccess.jsp");
-        }else{
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
-            PrintWriter out= response.getWriter();
-            out.println("<font color=red>Either user name or password is wrong.</font>");
-            rd.include(request, response);
+            //Step 3 open a connection
+            System.out.println("Connecting to database...");
+            connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            if(connection == null){
+                out.print("<p>error null</p>");
+            }
+
+            //Exectue query
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM user";
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            //Extract data from result set
+            while (resultSet.next()){
+                String first = resultSet.getString("firstName");
+                String last = resultSet.getString("lastName");
+
+                out.print("<p>First: " + first +"</p>");
+                out.print("<p>Last: " + last +"</p>");
+
+            }
+
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            out.print("<p>error class2</p>");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            out.print("<p>error sql</p>");
+        }finally {
+
+            if(statement != null){
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if(connection != null){
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
+        out.print(HTML_END);
+//
+//        Connection connection = null;
+//        Statement statement = null;
+//
+//
+//        try {
+//
+//            connectionManager = new DBConnectionManager(getServletContext().getInitParameter("dbURL"),
+//                    getServletContext().getInitParameter("dbUser"),
+//                    getServletContext().getInitParameter("dbUserPwd"));
+//            connection = connectionManager.getConnection();
+//
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        PrintWriter out = response.getWriter();
+//
+//        out.print(HTML_START);
+//        out.print("<h1>Login Page</h1>");
+//        out.print("<p>" +  getServletContext().getInitParameter("dbURL") + " " + getServletContext().getInitParameter("dbUser") + " " + getServletContext().getInitParameter("dbUserPwd") + "</p>" );
+//        if(connection == null){
+//            out.print("<p>ERROR</p>");
+//        }
+//
+//        try{
+//            statement = connection.createStatement();
+//            String sql = "SELECT * FROM user";
+//            ResultSet resultSet = statement.executeQuery(sql);
+//
+//            while(resultSet.next()){
+//
+//                String first = resultSet.getString("firstName");
+////                String last = resultSet.getString("lastName");
+////                String userName = resultSet.getString("userName");
+////                String password = resultSet.getString("password");
+//
+//                out.println("<p> First: " + first + "</p>");
+//            }
+//
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//
+//            out.println("<p>Error</p>");
+//        }
+//
+//        out.print(HTML_END);
+
 
     }
+
+
 
 }
