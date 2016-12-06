@@ -65,7 +65,6 @@ public class LoginServlet extends HttpServlet {
             ResultSet resultSet = statement.executeQuery(sql);
 
             while(resultSet.next()){
-
                 String first = resultSet.getString("firstName");
                 String last = resultSet.getString("lastName");
                 String userName = resultSet.getString("userName");
