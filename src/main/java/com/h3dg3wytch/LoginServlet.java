@@ -1,6 +1,8 @@
 package com.h3dg3wytch;
 
 import com.h3dg3wytch.database.DBConnectionManager;
+import com.h3dg3wytch.database.UserManager;
+import com.h3dg3wytch.models.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,17 +32,22 @@ public class LoginServlet extends HttpServlet {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL="jdbc:mysql://localhost/shoppingCart";
 
-    //Database creditionals
-    static final String USER = "developer";
-    static final String PASSWORD ="password";
 
     private DBConnectionManager connectionManager;
+    private UserManager userManager;
 
 
     public void init() throws ServletException {
 
-
-
+        try {
+            userManager = new UserManager(getServletContext().getInitParameter("dbURL"),
+                    getServletContext().getInitParameter("dbUser"),
+                    getServletContext().getInitParameter("dbUserPwd"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -99,12 +106,26 @@ public class LoginServlet extends HttpServlet {
 
         //Make sure to close the
 
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String userName = req.getParameter("user");
+        String password = req.getParameter("password");
+
+        User user = userManager.findUserByNameAndPassword(userName, password);
+        if(user != null){
+            userManager.destoryConnection();
+            resp.sendRedirect("main.jsp");
+
+        }else{
+            userManager.destoryConnection();
+            resp.sendRedirect("login.jsp");
+
+        }
 
 
 
 
     }
-
-
-
 }

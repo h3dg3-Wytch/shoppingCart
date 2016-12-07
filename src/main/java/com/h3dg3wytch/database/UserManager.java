@@ -71,14 +71,22 @@ public class UserManager {
 
     }
 
-    private User findUser(int userId){
+    public User findUser(int userId){
         return users.get(userId);
     }
 
     //todo return specific user in database
-    private User findUserInDatabase(){
+    public User findUserInDatabase(){
         return null;
 
+    }
+
+    public User findUserByNameAndPassword(String username, String password){
+        for(User user: users.values()){
+            if(user.getUserName().equals(username) && user.getPassword().equals(password))
+                return user;
+        }
+        return null;
     }
 
     private void deleteUser(){

@@ -41,6 +41,8 @@ public class DatabaseTest {
         UserManager userManager = new UserManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
         for(User usr: userManager.getUsers().values()){
             System.out.println("First Name: " + usr.getFirstName());
+            System.out.println("UserName: " + usr.getUserName());
+            System.out.println("Password: " + usr.getPassword());
         }
     }
 
@@ -61,5 +63,14 @@ public class DatabaseTest {
     public void UUIDtest(){
         String uuid = randomUUID().toString();
         System.out.println(uuid);
+    }
+
+    @Test
+    public void findUserByUserNameTest() throws SQLException, ClassNotFoundException {
+
+        UserManager userManager = new UserManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+        User user = userManager.findUserByNameAndPassword("dev", "password");
+        System.out.println(user.getUserName());
+
     }
 }
