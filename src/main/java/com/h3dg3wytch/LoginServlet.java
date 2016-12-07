@@ -8,9 +8,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
@@ -115,14 +113,25 @@ public class LoginServlet extends HttpServlet {
 
         User user = userManager.findUserByNameAndPassword(userName, password);
         if(user != null){
-            userManager.destoryConnection();
+            //resp.sendRedirect("main.jsp");
+
+            HttpSession session = req.getSession();
+            session.setAttribute("user", user);
+            //set session to expire in 30 minutes
+            session.setMaxInactiveInterval(30 * 60);
+
+            Cookie userCookie = new Cookie("user", user.getFirstName());
+            userCookie.setMaxAge(30 * 60);
+            resp.addCookie(userCookie);
+
             resp.sendRedirect("main.jsp");
 
         }else{
-            userManager.destoryConnection();
-            resp.sendRedirect("login.jsp");
-
+           resp.sendRedirect("login.jsp");
         }
+
+
+
 
 
 
