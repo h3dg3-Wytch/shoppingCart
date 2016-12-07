@@ -8,23 +8,26 @@ import java.util.UUID;
 public class User {
 
 
-    private int userId;
+    private String userId;
     private String firstName;
     private String lastName;
     private String userName;
     private String password;
 
 
-    public User(){}
+    public User(){
+        this.userId = UUID.randomUUID().toString();
+    }
 
     public User(String firstName, String lastName,String userName,String password){
+        this.userId = UUID.randomUUID().toString();
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
     }
 
-    public User(int userId, String firstName, String lastName,String userName,String password){
+    public User(String userId, String firstName, String lastName,String userName,String password){
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -66,11 +69,11 @@ public class User {
     }
 
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 }

@@ -15,7 +15,7 @@ public class UserManager {
 
     private DBConnectionManager connectionManager;
 
-    private HashMap<Integer, User> users;
+    private HashMap<String, User> users;
 
     public UserManager(String dbUrl, String dbUser, String dbPassword) throws SQLException, ClassNotFoundException {
 
@@ -36,7 +36,7 @@ public class UserManager {
 
             while(resultSet.next()){
 
-                int userId = resultSet.getInt("userId");
+                String userId = resultSet.getString("userId");
                 String firstName = resultSet.getString("firstName");
                 String lastName = resultSet.getString("lastName");
                 String userName = resultSet.getString("userName");
@@ -52,7 +52,7 @@ public class UserManager {
 
     }
 
-    public HashMap<Integer, User> getUsers() {
+    public HashMap<String, User> getUsers() {
         return users;
     }
 
