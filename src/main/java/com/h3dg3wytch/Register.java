@@ -49,7 +49,6 @@ public class Register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
-
         if (req.getParameter("firstPassword").equals(req.getParameter("secondPassword"))) {
             User user = new User(req.getParameter("firstName"), req.getParameter("lastName"), req.getParameter("userName"), req.getParameter("firstPassword"));
             userManager.addUser(user);
@@ -68,10 +67,8 @@ public class Register extends HttpServlet {
         session.setAttribute("user", user);
         //set session to expire in 30 minutes
         session.setMaxInactiveInterval(30 * 60);
-
         Cookie userCookie = new Cookie("user", user.getFirstName());
         userCookie.setMaxAge(30 * 60);
         resp.addCookie(userCookie);
-
     }
 }

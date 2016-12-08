@@ -80,27 +80,27 @@ public class DatabaseTest {
 
     }
 
-    @Test
-    public void addUsersToManager() throws SQLException, ClassNotFoundException {
-        UserManager userManager = new UserManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
-        for(int i = 0 ; i < 5; i++){
-            User user = new User("John", "Doe", "testUser#" + i, "password" );
-            userManager.addUser(user);
-        }
-
-        Object[] users = userManager.getUsers().values().toArray().clone();
-        for(int i = 0; i < users.length; i++){
-           User user = (User) users[i];
-            if(user.getFirstName().equals("John") || user.getFirstName().equals("Jack"))
-                userManager.deleteUser(user);
-        }
-
-        for (User user : userManager.getUsers().values()) {
-
-            System.out.println(user);
-
-        }
-    }
+//    @Test
+//    public void addUsersToManager() throws SQLException, ClassNotFoundException {
+//        UserManager userManager = new UserManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+//        for(int i = 0 ; i < 5; i++){
+//            User user = new User("John", "Doe", "testUser#" + i, "password" );
+//            userManager.addUser(user);
+//        }
+//
+//        Object[] users = userManager.getUsers().values().toArray().clone();
+//        for(int i = 0; i < users.length; i++){
+//           User user = (User) users[i];
+//            if(user.getFirstName().equals("John") || user.getFirstName().equals("Jack"))
+//                userManager.deleteUser(user);
+//        }
+//
+//        for (User user : userManager.getUsers().values()) {
+//
+//            System.out.println(user);
+//
+//        }
+//    }
 
     @Test
     public void UUIDtest(){
@@ -116,4 +116,6 @@ public class DatabaseTest {
         System.out.println(user.getUserName());
 
     }
+
+
 }
