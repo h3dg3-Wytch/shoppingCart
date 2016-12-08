@@ -274,11 +274,11 @@ function validateCreditCard()
   }
   if(sum % 10 == 0)
   {
-    alert("true");
+    alert("input is valid, this is where we show confirmation page");
   }
   else
   {
-    alert("false");
+    $("#cardError").html("Please enter a valid card number.");
   }
 }
 
