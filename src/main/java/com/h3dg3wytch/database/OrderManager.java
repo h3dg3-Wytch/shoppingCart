@@ -59,8 +59,9 @@ public class OrderManager extends Manager
 
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            return false;
+            //e.printStackTrace();
         }
-        return false;
+        return true;
     }
 }

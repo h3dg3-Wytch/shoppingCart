@@ -1,5 +1,6 @@
 import com.h3dg3wytch.database.AdminManager;
 import com.h3dg3wytch.database.DBConnectionManager;
+import com.h3dg3wytch.database.OrderManager;
 import com.h3dg3wytch.database.UserManager;
 import com.h3dg3wytch.models.Cart;
 import com.h3dg3wytch.models.Product;
@@ -16,6 +17,7 @@ import java.util.Collection;
 import java.util.UUID;
 
 import static java.util.UUID.randomUUID;
+import static junit.framework.TestCase.assertTrue;
 
 /**
  * Created by h3dg3wytch on 12/5/16.
@@ -117,6 +119,7 @@ public class DatabaseTest {
         System.out.println(user.getUserName());
     }
 
+    /*
     @Test
     public void adminTest() throws SQLException, ClassNotFoundException {
         AdminManager adminManager = new AdminManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
@@ -139,6 +142,16 @@ public class DatabaseTest {
         }
 
 
+    }
+    **/
+    
+    @Test
+    public void orderManagerGetTest() throws SQLException, ClassNotFoundException
+    {
+        OrderManager orderManager = new OrderManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+        boolean get = orderManager.get();
+
+        assertTrue(get);
     }
 
 
