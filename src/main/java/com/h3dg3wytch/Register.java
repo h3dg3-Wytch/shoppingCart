@@ -22,7 +22,7 @@ public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
-        out.print(HTML_START     + "<h1>Register</h1>" +HTML_END);
+        out.print(HTML_START+ "<h1>Register</h1>" +HTML_END);
     }
 
     @Override
@@ -35,6 +35,8 @@ public class Register extends HttpServlet {
         out.print("<p>" +req.getParameter("firstPassword")+ "</p>");
         out.print("<p>" +req.getParameter("secondPassword")+ "</p>");
         out.print(HTML_END);
+
+
 
 
     }
