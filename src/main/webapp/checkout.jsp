@@ -3,11 +3,11 @@
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src = "checkout.js"></script>
+    <script src = "/js/checkout.js"></script>
   </head>
 
   <body>
-
+	
     <div>
       <h2>Order Details</h2>
       <p>This is where the items and total price will go... well at least the total price has to be somewhere</p>
@@ -127,10 +127,10 @@
         <button type="button"onclick="validateForm(this.form)">Submit</button>
       </form>
       <div>
-        <img id = "mastercardImage" src="mastercard.png"style="width:60px;height:60px;">
-        <img id = "visaImage" src="visa.png"style="width:60px;height:60px;">
-        <img id = "americanexpressImage" src="americanexpress.png"style="width:60px;height:60px;">
-        <img id = "discoverImage" src="discover.png"style="width:60px;height:60px;">
+        <img id = "mastercardImage" src="/images/mastercard.png"style="width:60px;height:60px;">
+        <img id = "visaImage" src="/images/visa.png"style="width:60px;height:60px;">
+        <img id = "americanexpressImage" src="/images/americanexpress.png"style="width:60px;height:60px;">
+        <img id = "discoverImage" src="/images/discover.png"style="width:60px;height:60px;">
       </div>
     </div>
   </body>
