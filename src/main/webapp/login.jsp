@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=US-ASCII"
+    pageEncoding="US-ASCII"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,9 +15,8 @@
     Password: <input type="password" name="password">
     <br>
     <input type="submit" value="Login">
-</form>
-<form action="Register" method="post">
-    <input type="submit" value="New user? Register here">
+    <button type="button"><a href="register.jsp">New User?</button>
+
 </form>
 </body>
 </html>
