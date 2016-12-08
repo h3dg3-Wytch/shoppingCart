@@ -14,5 +14,8 @@
     <br>
     <input type="submit" value="Login">
 </form>
+<form action="Register" method="post">
+    <input type="submit" value="New user? Register here">
+</form>
 </body>
 </html>

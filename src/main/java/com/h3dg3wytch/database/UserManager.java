@@ -57,12 +57,15 @@ public class UserManager {
     }
 
     public void addUser(User user){
+        users.put(user.getUserId(), user);
         if(user != null) {
             try {
                 Connection connection = connectionManager.getConnection();
                 Statement statement = connection.createStatement();
-                String sql = "INSERT INTO user (firstName, lastName, userName, password) VALUES (" + user.getFirstName() + "," + user.getLastName() + "," + user.getUserName() + "," + user.getPassword() + ")";
-                statement.executeUpdate(sql);
+                //String sql = "INSERT INTO user (firstName, lastName, userId, userName, password) VALUES ("+ user.getUserName()+", "+user.getLastName()+"," +user.getUserId()+", "+user.getUserName()+", "+ user.getPassword()+")";
+                String sql = "INSERT INTO user VALUES (" + "'" + user.getFirstName()+ "', '" + user.getLastName() + "','" +user.getUserId() + "','" + user.getUserName() +  "','" + user.getPassword()+ " ')";
+
+                    statement.executeUpdate(sql);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -76,11 +79,6 @@ public class UserManager {
     }
 
     //todo return specific user in database
-    public User findUserInDatabase(){
-        return null;
-
-    }
-
     public User findUserByNameAndPassword(String username, String password){
         for(User user: users.values()){
             if(user.getUserName().equals(username) && user.getPassword().equals(password))
@@ -89,17 +87,29 @@ public class UserManager {
         return null;
     }
 
-    private void deleteUser(){
+    public void deleteUser(User user){
+        users.remove(user.getUserId());
+        try {
+            Connection connection = connectionManager.getConnection();
+            Statement statement = connection.createStatement();
+            String sql = "DELETE FROM user WHERE userId =  '" + user.getUserId() + "'";
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
-    //todo Makes sql user admin table
-    private void makeUserAdmin(){
-
-    }
-
-
-    private void removeUsersAdminStatus(){
+    public void deleteUser(String userId){
+        users.remove(userId);
+        try {
+            Connection connection = connectionManager.getConnection();
+            Statement statement = connection.createStatement();
+            String sql = "DELETE FROM user WHERE userId =  '" + userId+ "';";
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 

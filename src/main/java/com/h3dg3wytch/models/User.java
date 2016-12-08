@@ -68,6 +68,10 @@ public class User {
         this.password = password;
     }
 
+    @Override
+    public String toString(){
+        return " FirstName: " + firstName+  " LastName:" + lastName + " UserName " + userName+ " UserID: " + userId;
+    }
 
     public String getUserId() {
         return userId;

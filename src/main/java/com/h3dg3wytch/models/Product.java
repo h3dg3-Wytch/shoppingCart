@@ -13,13 +13,20 @@ public class Product {
     private String imageUrl;
     private String productDescription;
 
+
+    @Override
+    public String toString() {
+        return "productId: " + productId + " productName: " + productName + " productPrice: " + productPrice + " Image Url: " + imageUrl;
+    }
+
+
     public Product(){
 
         this.productId = UUID.randomUUID().toString();
 
     }
 
-    public Product(String productId, String productName,double productPrice,String imageUrl){
+    public Product(String productId, String productName,double productPrice,String imageUrl, String productDescription){
         this.productId = productId;
         this.productName = productName;
         this.productPrice = productPrice;
