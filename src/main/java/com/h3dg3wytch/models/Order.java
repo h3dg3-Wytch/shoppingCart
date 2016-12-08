@@ -1,23 +1,26 @@
 package com.h3dg3wytch.models;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 public class Order
 {
 
-    private String orderId, productId, userId;
+    private String productId, userId;
+    private int orderId;
 
-    public Order(String orderId, String productId, String userId)
+
+    public Order(String productId, String userId)
+    {
+        this.productId = productId;
+        this.userId = userId;
+    }
+
+    public Order(int orderId, String productId, String userId)
     {
         this.orderId = orderId;
         this.productId = productId;
         this.userId = userId;
-
     }
 
-    public String getOrderId()
+    public int getOrderId()
     {
         return orderId;
     }

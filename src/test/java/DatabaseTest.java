@@ -3,6 +3,7 @@ import com.h3dg3wytch.database.DBConnectionManager;
 import com.h3dg3wytch.database.OrderManager;
 import com.h3dg3wytch.database.UserManager;
 import com.h3dg3wytch.models.Cart;
+import com.h3dg3wytch.models.Order;
 import com.h3dg3wytch.models.Product;
 import com.h3dg3wytch.models.User;
 import org.junit.Test;
@@ -17,6 +18,7 @@ import java.util.Collection;
 import java.util.UUID;
 
 import static java.util.UUID.randomUUID;
+import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 /**
@@ -144,14 +146,36 @@ public class DatabaseTest {
 
     }
     **/
-    
+
     @Test
     public void orderManagerGetTest() throws SQLException, ClassNotFoundException
     {
         OrderManager orderManager = new OrderManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
-        boolean get = orderManager.get();
+        boolean expected = orderManager.get();
 
-        assertTrue(get);
+        assertTrue(expected);
+    }
+
+    @Test
+    public void orderManagerAddOrderWithNullTest() throws SQLException, ClassNotFoundException
+    {
+        OrderManager orderManager = new OrderManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+
+        boolean expected = orderManager.addOrder(null);
+
+        assertFalse(expected);
+    }
+
+    @Test
+    public void orderManagerAddOrderTest() throws SQLException, ClassNotFoundException
+    {
+        OrderManager orderManager = new OrderManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+        
+        Order order = new Order(0,"d916c0d9-bd8e-11e6-bd88-bcaec50ef9d8","d8c9d1a8-bd8f-11e6-bd88-bcaec50ef9d8");
+
+        boolean expected = orderManager.addOrder(order);
+
+        assertTrue(expected);
     }
 
 
