@@ -56,7 +56,7 @@ public class Register extends HttpServlet {
             createSession(user, req, resp);
             resp.sendRedirect("main.jsp");
         }else{
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/register.jsp");
             out.println("<font color=red>Passwords don't match!</font>");
             rd.include(req, resp);
 
