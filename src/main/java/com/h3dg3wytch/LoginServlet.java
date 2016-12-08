@@ -1,5 +1,6 @@
 package com.h3dg3wytch;
 
+import com.h3dg3wytch.database.AdminManager;
 import com.h3dg3wytch.database.DBConnectionManager;
 import com.h3dg3wytch.database.UserManager;
 import com.h3dg3wytch.models.User;
@@ -33,18 +34,23 @@ public class LoginServlet extends HttpServlet {
 
     private DBConnectionManager connectionManager;
     private UserManager userManager;
+    private ArrayList<String> admins;
+
 
 
     public void init() throws ServletException {
-
-
 
         try {
             userManager = new UserManager(getServletContext().getInitParameter("dbURL"),
                     getServletContext().getInitParameter("dbUser"),
                     getServletContext().getInitParameter("dbUserPwd"));
+            AdminManager adminManager = new AdminManager(getServletContext().getInitParameter("dbURL"),
+                    getServletContext().getInitParameter("dbUser"),
+                    getServletContext().getInitParameter("dbUserPwd"));
+            admins = adminManager.getAdmins();
+            adminManager = null;
 
-            getServletContext().setAttribute("userManager", userManager.getConnectionManager().getConnection());
+
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -132,6 +138,14 @@ public class LoginServlet extends HttpServlet {
     public void createSession(User user, HttpServletRequest req, HttpServletResponse resp ){
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
+
+        if(admins.contains(user.getUserId())) {
+            System.out.print("TRUE");
+            session.setAttribute("admin", "true");
+        }else {
+            log("FALSE");
+            session.setAttribute("admin", "false");
+        }
         //set session to expire in 30 minutes
         session.setMaxInactiveInterval(30 * 60);
 

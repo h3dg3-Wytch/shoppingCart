@@ -52,11 +52,19 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="">Home</a></li>
-        <li><a href="/profile.jsp">Profile</a></li>
+        <li><a href='/profile.jsp'>Profile</a></li>
         <li><a href="/inventory.jsp">Inventory</a></li>
-        <li><a href="/viewVart">View Cart</a></li>
+        <li><a href="/viewVart.jsp">View Cart</a></li>
         <li><a href="/checkout.jsp">Checkout</a></li>
-        <li><a href="/admin.jsp">Admin</a></li>
+
+        <%
+            String adminTag = "";
+            if(session.getAttribute("admin").equals("true")){
+                adminTag ="<li><a href=\"admin.jsp\">Admin</a></li>";
+            }
+        %>
+        <%= adminTag %>
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
