@@ -19,6 +19,7 @@ public class AdminManager extends Manager {
     public AdminManager(String dbUrl, String dbUser, String dbpassword) throws SQLException, ClassNotFoundException {
         super(dbUrl, dbUser, dbpassword);
         admins = new ArrayList<>();
+        get();
     }
 
     @Override
@@ -52,7 +53,10 @@ public class AdminManager extends Manager {
             return false;
         }
         return true;
-
-
     }
+
+    public ArrayList<String> getAdmins() {
+        return admins;
+    }
+
 }

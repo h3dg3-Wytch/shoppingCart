@@ -1,3 +1,4 @@
+import com.h3dg3wytch.database.AdminManager;
 import com.h3dg3wytch.database.DBConnectionManager;
 import com.h3dg3wytch.database.UserManager;
 import com.h3dg3wytch.models.Cart;
@@ -114,6 +115,14 @@ public class DatabaseTest {
         UserManager userManager = new UserManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
         User user = userManager.findUserByNameAndPassword("dev", "password");
         System.out.println(user.getUserName());
+
+    }
+
+    @Test
+    public void adminTest() throws SQLException, ClassNotFoundException {
+        AdminManager adminManager = new AdminManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+        for(String userId: adminManager.)
+
 
     }
 
