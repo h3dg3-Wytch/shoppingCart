@@ -121,7 +121,9 @@ public class DatabaseTest {
     @Test
     public void adminTest() throws SQLException, ClassNotFoundException {
         AdminManager adminManager = new AdminManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
-        for(String userId: adminManager.)
+        for(String userId: adminManager.getAdmins()){
+            System.out.println(userId);
+        }
 
 
     }
