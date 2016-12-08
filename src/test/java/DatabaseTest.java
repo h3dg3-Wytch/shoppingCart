@@ -115,12 +115,25 @@ public class DatabaseTest {
         UserManager userManager = new UserManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
         User user = userManager.findUserByNameAndPassword("dev", "password");
         System.out.println(user.getUserName());
-
     }
 
     @Test
     public void adminTest() throws SQLException, ClassNotFoundException {
         AdminManager adminManager = new AdminManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+        System.out.println("Get all values");
+        for(String userId: adminManager.getAdmins()){
+            System.out.println(userId);
+        }
+
+        System.out.println("Insertion");
+        adminManager.addUser("dafb59c9-17b3-499b-ac7c-6ad2060ef6a4");
+        for(String userId: adminManager.getAdmins()){
+            System.out.println(userId);
+        }
+
+        System.out.println("Deletion");
+        adminManager.removeUserAsAdmin("dafb59c9-17b3-499b-ac7c-6ad2060ef6a4");
+
         for(String userId: adminManager.getAdmins()){
             System.out.println(userId);
         }

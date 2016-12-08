@@ -1,5 +1,7 @@
 package com.h3dg3wytch.database;
 
+import com.h3dg3wytch.models.User;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -55,8 +57,68 @@ public class AdminManager extends Manager {
         return true;
     }
 
+    public void addUser(User user) {
+        admins.add(user.getUserId());
+        if (user != null) {
+            try {
+                Connection connection = dbConnectionManager.getConnection();
+                Statement statement = connection.createStatement();
+                //String sql = "INSERT INTO user (firstName, lastName, userId, userName, password) VALUES ("+ user.getUserName()+", "+user.getLastName()+"," +user.getUserId()+", "+user.getUserName()+", "+ user.getPassword()+")";
+                String sql = "INSERT INTO admins VALUES ('" + user.getUserId() + "')";
+
+                statement.executeUpdate(sql);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void addUser(String userId) {
+        admins.add(userId);
+        if (userId != null) {
+            try {
+                Connection connection = dbConnectionManager.getConnection();
+                Statement statement = connection.createStatement();
+                //String sql = "INSERT INTO user (firstName, lastName, userId, userName, password) VALUES ("+ user.getUserName()+", "+user.getLastName()+"," +user.getUserId()+", "+user.getUserName()+", "+ user.getPassword()+")";
+                String sql = "INSERT INTO admins (userId) VALUES ('" + userId + "')";
+                statement.executeUpdate(sql);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void removeUserAsAdmin(String userId){
+        admins.remove(userId);
+            try {
+                Connection connection = dbConnectionManager.getConnection();
+                Statement statement = connection.createStatement();
+                //String sql = "INSERT INTO user (firstName, lastName, userId, userName, password) VALUES ("+ user.getUserName()+", "+user.getLastName()+"," +user.getUserId()+", "+user.getUserName()+", "+ user.getPassword()+")";
+                String sql = "DELETE FROM admins WHERE userId = '" + userId +"'";
+                statement.executeUpdate(sql);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+    }
+
+    public void removeUserAsAdmin(User user){
+
+        admins.remove(user.getUserId());
+        try {
+            Connection connection = dbConnectionManager.getConnection();
+            Statement statement = connection.createStatement();
+            //String sql = "INSERT INTO user (firstName, lastName, userId, userName, password) VALUES ("+ user.getUserName()+", "+user.getLastName()+"," +user.getUserId()+", "+user.getUserName()+", "+ user.getPassword()+")";
+            String sql = "DELETE FROM admins WHERE userdId = '" + user.getUserId() +"')";
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public ArrayList<String> getAdmins() {
         return admins;
     }
+
 
 }
