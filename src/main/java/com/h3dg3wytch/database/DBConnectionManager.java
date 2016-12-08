@@ -28,4 +28,9 @@ public class DBConnectionManager {
     public Connection getConnection(){
         return this.connection;
     }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+
 }

@@ -17,6 +17,10 @@ public class UserManager {
 
     private HashMap<String, User> users;
 
+    public UserManager(){
+        users = new HashMap<>();
+    }
+
     public UserManager(String dbUrl, String dbUser, String dbPassword) throws SQLException, ClassNotFoundException {
 
         connectionManager = new DBConnectionManager(dbUrl, dbUser, dbPassword);
@@ -120,5 +124,13 @@ public class UserManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public DBConnectionManager getConnectionManager() {
+        return connectionManager;
+    }
+
+    public void setConnectionManager(DBConnectionManager connectionManager) {
+        this.connectionManager = connectionManager;
     }
 }

@@ -37,10 +37,14 @@ public class LoginServlet extends HttpServlet {
 
     public void init() throws ServletException {
 
+
+
         try {
             userManager = new UserManager(getServletContext().getInitParameter("dbURL"),
                     getServletContext().getInitParameter("dbUser"),
                     getServletContext().getInitParameter("dbUserPwd"));
+
+            getServletContext().setAttribute("userManager", userManager.getConnectionManager().getConnection());
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -115,26 +119,25 @@ public class LoginServlet extends HttpServlet {
         if(user != null){
             //resp.sendRedirect("main.jsp");
 
-            HttpSession session = req.getSession();
-            session.setAttribute("user", user);
-            //set session to expire in 30 minutes
-            session.setMaxInactiveInterval(30 * 60);
-
-            Cookie userCookie = new Cookie("user", user.getFirstName());
-            userCookie.setMaxAge(30 * 60);
-            resp.addCookie(userCookie);
+           createSession(user, req, resp);
 
             resp.sendRedirect("main.jsp");
 
         }else{
            resp.sendRedirect("login.jsp");
         }
+    }
 
 
+    public void createSession(User user, HttpServletRequest req, HttpServletResponse resp ){
+        HttpSession session = req.getSession();
+        session.setAttribute("user", user);
+        //set session to expire in 30 minutes
+        session.setMaxInactiveInterval(30 * 60);
 
-
-
-
+        Cookie userCookie = new Cookie("user", user.getFirstName());
+        userCookie.setMaxAge(30 * 60);
+        resp.addCookie(userCookie);
 
     }
 }
