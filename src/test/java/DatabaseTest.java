@@ -24,64 +24,64 @@ import static junit.framework.TestCase.assertTrue;
  */
 public class DatabaseTest {
 
-    @Test
-    public void testDatabase(){
-        try {
-            DBConnectionManager connectionManager = new DBConnectionManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
-            Connection connection = connectionManager.getConnection();
+    // @Test
+    // public void testDatabase(){
+    //     try {
+    //         DBConnectionManager connectionManager = new DBConnectionManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+    //         Connection connection = connectionManager.getConnection();
 
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM user");
-            while(resultSet.next()){
-                System.out.println(resultSet.getString("firstName"));
-            }
+    //         Statement statement = connection.createStatement();
+    //         ResultSet resultSet = statement.executeQuery("SELECT * FROM user");
+    //         while(resultSet.next()){
+    //             System.out.println(resultSet.getString("firstName"));
+    //         }
 
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    //     } catch (ClassNotFoundException e) {
+    //         e.printStackTrace();
+    //     } catch (SQLException e) {
+    //         e.printStackTrace();
+    //     }
 
-    }
+    // }
 
-    @Test
-    public void testUserManager() throws SQLException, ClassNotFoundException {
-        UserManager userManager = new UserManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
-        for(User usr: userManager.getUsers().values()){
-            System.out.println("First Name: " + usr.getFirstName());
-            System.out.println("UserName: " + usr.getUserName());
-            System.out.println("Password: " + usr.getPassword());
-        }
-    }
+    // @Test
+    // public void testUserManager() throws SQLException, ClassNotFoundException {
+    //     UserManager userManager = new UserManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+    //     for(User usr: userManager.getUsers().values()){
+    //         System.out.println("First Name: " + usr.getFirstName());
+    //         System.out.println("UserName: " + usr.getUserName());
+    //         System.out.println("Password: " + usr.getPassword());
+    //     }
+    // }
 
-    @Test
-    public void CartTest(){
-        Cart cart = new Cart();
+    // @Test
+    // public void CartTest(){
+    //     Cart cart = new Cart();
 
-        for(int i = 0 ; i < 5; i++){
-            Product product = new Product("Product#" + i, 34.3, "image.jpg");
-            cart.addToCart(product);
-        }
+    //     for(int i = 0 ; i < 5; i++){
+    //         Product product = new Product("Product#" + i, 34.3, "image.jpg");
+    //         cart.addToCart(product);
+    //     }
 
-        Product p = new Product("Test", 34, "sdf");
-        cart.addToCart(p);
+    //     Product p = new Product("Test", 34, "sdf");
+    //     cart.addToCart(p);
 
-        for (Product o : cart.getProducts() ) {
+    //     for (Product o : cart.getProducts() ) {
 
-            System.out.println(o.toString());
+    //         System.out.println(o.toString());
 
-        }
-        System.out.println();
-        if(cart.removeFromCart(p)) {
+    //     }
+    //     System.out.println();
+    //     if(cart.removeFromCart(p)) {
 
-            for (Product o : cart.getProducts()) {
+    //         for (Product o : cart.getProducts()) {
 
-                System.out.println(o.toString());
+    //             System.out.println(o.toString());
 
-            }
-        }
+    //         }
+    //     }
 
-    }
+    // }
 
 //    @Test
 //    public void addUsersToManager() throws SQLException, ClassNotFoundException {
@@ -105,19 +105,19 @@ public class DatabaseTest {
 //        }
 //    }
 
-    @Test
-    public void UUIDtest(){
-        String uuid = randomUUID().toString();
-        System.out.println(uuid);
-    }
+    // @Test
+    // public void UUIDtest(){
+    //     String uuid = randomUUID().toString();
+    //     System.out.println(uuid);
+    // }
 
-    @Test
-    public void findUserByUserNameTest() throws SQLException, ClassNotFoundException {
+    // @Test
+    // public void findUserByUserNameTest() throws SQLException, ClassNotFoundException {
 
-        UserManager userManager = new UserManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
-        User user = userManager.findUserByNameAndPassword("dev", "password");
-        System.out.println(user.getUserName());
-    }
+    //     UserManager userManager = new UserManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+    //     User user = userManager.findUserByNameAndPassword("dev", "password");
+    //     System.out.println(user.getUserName());
+    // }
 
     /*
     @Test
@@ -154,15 +154,15 @@ public class DatabaseTest {
 //        assertTrue(expected);
 //    }
 
-    @Test
-    public void orderManagerAddOrderWithNullTest() throws SQLException, ClassNotFoundException
-    {
-        OrderManager orderManager = new OrderManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+    // @Test
+    // public void orderManagerAddOrderWithNullTest() throws SQLException, ClassNotFoundException
+    // {
+    //     OrderManager orderManager = new OrderManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
 
-        boolean expected = orderManager.addOrder(null);
+    //     boolean expected = orderManager.addOrder(null);
 
-        assertFalse(expected);
-    }
+    //     assertFalse(expected);
+    // }
 
 //    @Test
 //    public void orderManagerAddOrderTest() throws SQLException, ClassNotFoundException
@@ -175,15 +175,15 @@ public class DatabaseTest {
 //        assertTrue(expected);
 //    }
 
-    @Test
-    public void productManagerAddProductWithNullTest() throws SQLException, ClassNotFoundException
-    {
-        ProductManager productManager = new ProductManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+    // @Test
+    // public void productManagerAddProductWithNullTest() throws SQLException, ClassNotFoundException
+    // {
+    //     ProductManager productManager = new ProductManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
 
-        boolean expected = productManager.addProduct(null);
+    //     boolean expected = productManager.addProduct(null);
 
-        assertFalse(expected);
-    }
+    //     assertFalse(expected);
+    // }
 
 //    @Test
 //    public void productManagerAddProductTest() throws SQLException, ClassNotFoundException
