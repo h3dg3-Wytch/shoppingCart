@@ -78,7 +78,7 @@ public class UserManager {
 
     }
 
-    public User findUser(int userId){
+    public User findUser(String userId){
         return users.get(userId);
     }
 

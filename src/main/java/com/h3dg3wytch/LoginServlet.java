@@ -126,7 +126,6 @@ public class LoginServlet extends HttpServlet {
             //resp.sendRedirect("main.jsp");
 
            createSession(user, req, resp);
-
             resp.sendRedirect("main.jsp");
 
         }else{

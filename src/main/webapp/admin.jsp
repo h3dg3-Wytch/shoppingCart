@@ -29,17 +29,20 @@
       padding: 25px;
     }
 
-  .carousel-inner img {
-      width: 100%; /* Set width to 100% */
-      margin: auto;
-      min-height:200px;
-  }
-
-  /* Hide the carousel text when the screen is less than 600 pixels wide */
-  @media (max-width: 600px) {
-    .carousel-caption {
-      display: none;
+    input[type=checkbox], input[type=radio] {
+      vertical-align: middle;
+      position: relative;
+      bottom: 1px;
     }
+
+    input[type=radio] {
+      bottom: 2px;
+    }
+
+    #inputs{
+        margin: 5px;
+    }
+
   }
   </style>
 </head>
@@ -102,34 +105,53 @@
 
 <div class="row">
 
+ <%
+    String booleanString = "";
+    String error= "";
+    if(session.getAttribute("doubleAdminError") != null){
+        booleanString = (String) session.getAttribute("doubleAdminError");
+        if(booleanString.equals("true")){
+            error ="User is already and admin!";
+        }
+    }
+ %>
+
+ <h3><%=error%></h3>
+
     <form action="Admin" method="post">
+
+
+     <input type="submit" name="delete" value="Delete User"/>
+     <input type="submit" name="addAdmin" value="Make Admin"/>
+     <input type="submit" name="removeAdmin" value="Remove Admin"/>
+
      <table>
-     <th>User Id</th><th>First Name</th><th>Last Name</th><th>User Name</th><th>Admin</th>
+     <div id="inputs">
      <c:forEach var="row" items="${result.rows}">
-        <input type="checkbox" name="row.userId" value="userId"><c:out value="${row.userId}"/></input><br/>
-            <td><c:out value="${row.firstName}"/></td>
-            <td><c:out value="${row.lastName}"/></td>
-            <td><c:out value="${row.userName}"/></td>
-            <td>
-                <c:forEach var="adminRow" items="${admin.rows}">
-                    <c:if test="${row.userId eq adminRow.userId}">
-                         <c:out value="Yes"/>
-                    </c:if>
-                    <c:if test="${row.userId != adminRow.userId}">
-                       <c:out value="No"/>
-                    </c:if>
-                </c:forEach>
-            </td>
+        <tr><label>
+        <input type="radio" name="user" value=<c:out value="${row.userId}"/>>
+        <c:out value="User ID: ${row.userId}"/>
+        <c:out value="First Name: ${row.firstName}"/>
+        <c:out value="Last Name: ${row.lastName}"/>
+        <c:out value="User Name: ${row.userName}"/>
+        <c:forEach var="adminRow" items="${admin.rows}">
+           <c:if test="${row.userId eq adminRow.userId}">
+                                 <c:out value="Admin: Yes"/>
+            </c:if>
 
-
-        </tr>
-        </input>
+        </c:forEach>
+        </input></label></tr>
      </c:forEach>
-      </table>
+     </table>
 
-    <form action="Admin" method="post">
-        <input type ="Submit" value= "Submit">
-    </form>
+     </div>
+
+     </form>
+
+
+
+
+
 </div>
 </div><br>
 

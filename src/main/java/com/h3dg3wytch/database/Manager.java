@@ -17,4 +17,12 @@ public abstract class Manager {
     public abstract boolean insert();
     public abstract boolean get();
 
+    public DBConnectionManager getDbConnectionManager() {
+        return dbConnectionManager;
+    }
+
+    public void setDbConnectionManager(DBConnectionManager dbConnectionManager) {
+        this.dbConnectionManager = dbConnectionManager;
+    }
+
 }

@@ -164,17 +164,16 @@ public class DatabaseTest {
         assertFalse(expected);
     }
 
-    @Test
-    public void orderManagerAddOrderTest() throws SQLException, ClassNotFoundException
-    {
-        OrderManager orderManager = new OrderManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
-        
-        Order order = new Order(0,"d916c0d9-bd8e-11e6-bd88-bcaec50ef9d8","d8c9d1a8-bd8f-11e6-bd88-bcaec50ef9d8");
-
-        boolean expected = orderManager.addOrder(order);
-
-        assertTrue(expected);
-    }
+//    @Test
+//    public void orderManagerAddOrderTest() throws SQLException, ClassNotFoundException
+//    {
+//        OrderManager orderManager = new OrderManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+//
+//        Order order = new Order(0,"d916c0d9-bd8e-11e6-bd88-bcaec50ef9d8","d8c9d1a8-bd8f-11e6-bd88-bcaec50ef9d8");
+//
+//        boolean expected = orderManager.addOrder(order);
+//        assertTrue(expected);
+//    }
 
     @Test
     public void productManagerAddProductWithNullTest() throws SQLException, ClassNotFoundException
@@ -208,12 +207,14 @@ public class DatabaseTest {
         assertFalse(expected);
     }
 
+
     @Test
     public void productManagerDeleteProductTest() throws SQLException, ClassNotFoundException
     {
         ProductManager productManager = new ProductManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
 
         ArrayList<Product> products = (ArrayList)productManager.getProducts();
+
 
         Product product = products.get(0);
 
