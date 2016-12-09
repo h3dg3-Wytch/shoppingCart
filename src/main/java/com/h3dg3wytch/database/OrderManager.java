@@ -84,6 +84,9 @@ public class OrderManager extends Manager
                 String sql = "INSERT INTO orders (userId, productId) VALUES (" + "'" + userId+ "', '" + productId + "')";
 
                 statement.executeUpdate(sql);
+
+                orders.clear();
+                get();
                 return true;
             }
             catch (SQLException e)

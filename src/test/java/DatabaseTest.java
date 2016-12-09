@@ -1,7 +1,4 @@
-import com.h3dg3wytch.database.AdminManager;
-import com.h3dg3wytch.database.DBConnectionManager;
-import com.h3dg3wytch.database.OrderManager;
-import com.h3dg3wytch.database.UserManager;
+import com.h3dg3wytch.database.*;
 import com.h3dg3wytch.models.Cart;
 import com.h3dg3wytch.models.Order;
 import com.h3dg3wytch.models.Product;
@@ -176,6 +173,42 @@ public class DatabaseTest {
         boolean expected = orderManager.addOrder(order);
 
         assertTrue(expected);
+    }
+
+    @Test
+    public void productManagerAddProductWithNullTest() throws SQLException, ClassNotFoundException
+    {
+        ProductManager productManager = new ProductManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+
+        boolean expected = productManager.addProduct(null);
+
+        assertFalse(expected);
+    }
+
+    @Test
+    public void productManagerAddProductTest() throws SQLException, ClassNotFoundException
+    {
+        ProductManager productManager = new ProductManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+
+        Product product = new Product();
+        product.setProductName(null);
+        product.setProductPrice(52);
+        product.setImageUrl(null);
+        product.setProductDescription(null);
+
+        boolean expected = productManager.addProduct(product);
+
+        assertTrue(expected);
+    }
+
+    @Test
+    public void productManagerDeleteProductWithNullTest() throws SQLException, ClassNotFoundException
+    {
+        ProductManager productManager = new ProductManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+
+        boolean expected = productManager.deleteProduct(null);
+
+        assertFalse(expected);
     }
 
 
