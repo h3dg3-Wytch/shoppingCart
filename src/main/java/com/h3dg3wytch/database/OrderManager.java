@@ -20,7 +20,6 @@ public class OrderManager extends Manager
     public OrderManager(String dbUrl, String dbUser, String dbpassword) throws SQLException, ClassNotFoundException
     {
         super(dbUrl, dbUser, dbpassword);
-        connectionManager = new DBConnectionManager(dbUrl, dbUser, dbpassword);
     }
 
 
@@ -67,6 +66,11 @@ public class OrderManager extends Manager
             //e.printStackTrace();
         }
         return true;
+    }
+
+    public HashMap getOrders()
+    {
+        return orders;
     }
 
     public boolean addOrder(Order order)
