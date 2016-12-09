@@ -190,11 +190,7 @@ public class DatabaseTest {
     {
         ProductManager productManager = new ProductManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
 
-        Product product = new Product();
-        product.setProductName(null);
-        product.setProductPrice(52);
-        product.setImageUrl(null);
-        product.setProductDescription(null);
+        Product product = new Product(UUID.randomUUID().toString(),"huh",52,"huh", "huh");
 
         boolean expected = productManager.addProduct(product);
 

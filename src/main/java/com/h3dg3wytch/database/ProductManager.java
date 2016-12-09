@@ -81,7 +81,7 @@ public class ProductManager extends Manager
                 Statement statement = connection.createStatement();
                 System.out.println("this is some shit " + product.getProductId());
 
-                String sql = "INSERT INTO user VALUES (" + "'" + product.getProductId()+ "', '" + product.getProductName() + "'," +
+                String sql = "INSERT INTO product VALUES (" + "'" + product.getProductId()+ "', '" + product.getProductName() + "'," +
                         "'" +product.getProductPrice()+ "','" + product.getImageUrl() +  "','" + product.getProductDescription()+ " ')";
 
                 statement.executeUpdate(sql);
