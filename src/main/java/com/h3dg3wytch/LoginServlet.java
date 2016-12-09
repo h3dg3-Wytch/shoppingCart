@@ -138,6 +138,7 @@ public class LoginServlet extends HttpServlet {
     public void createSession(User user, HttpServletRequest req, HttpServletResponse resp ){
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
+        session.setAttribute("users", userManager.getUsers().values());
 
         if(admins.contains(user.getUserId())) {
             System.out.print("TRUE");

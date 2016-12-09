@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=US-ASCII"
     pageEncoding="US-ASCII"%>
 <%@page import="com.h3dg3wytch.models.User"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="x" uri="http://java.sun.com/jstl/xml" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jstl/sql" %>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -86,12 +90,42 @@
       userName = user.getFirstName();
   }
   %>
-  <h3>Hi <%=userName %>, Login successful.</h3>
-  <br>
-  User=<%=user %>
-  <br>
+  <h3>Hello Admin <%=userName %>, here are the current users.</h3>
+
+ <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
+      url="jdbc:mysql://localhost/shoppingCart"
+      user="developer"  password="password"/>
+
+ <sql:query dataSource="${snapshot}" sql="SELECT * FROM user;" var="result" />
+  <sql:query dataSource="${snapshot}" sql="SELECT * FROM admins;" var="admin" />
+
 
 <div class="row">
+
+    <form action="Admin" method="post">
+    <table>
+     <th>User Id</th><th>First Name</th><th>Last Name</th><th>User Name</th><th>Admin</th>
+     <c:forEach var="row" items="${result.rows}">
+        <input><tr>
+            <td><c:out value="${row.userId}"/></td>
+            <td><c:out value="${row.firstName}"/></td>
+            <td><c:out value="${row.lastName}"/></td>
+            <td><c:out value="${row.userName}"/></td>
+            <td>
+                <c:forEach var="adminRow" items="${admin.rows}">
+                    <c:if test="${row.userId eq adminRow.userId}">
+                         <c:out value="Yes"/>
+                    </c:if>
+                    <c:if test="${row.userId != adminRow.userId}">
+                       <c:out value="No"/>
+                    </c:if>
+                </c:forEach>
+            </td>
+        <form action="Admin" method="post">
+
+        </tr>
+     </c:forEach>
+      </table>
 
     <form action="Admin" method="post">
         <input type ="Submit" value= "Submit">

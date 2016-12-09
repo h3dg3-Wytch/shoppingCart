@@ -21,9 +21,7 @@ public class Product {
 
 
     public Product(){
-
         this.productId = UUID.randomUUID().toString();
-
     }
 
     public Product(String productId, String productName,double productPrice,String imageUrl, String productDescription){
