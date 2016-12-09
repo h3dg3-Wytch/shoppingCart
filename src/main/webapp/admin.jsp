@@ -106,8 +106,7 @@
      <table>
      <th>User Id</th><th>First Name</th><th>Last Name</th><th>User Name</th><th>Admin</th>
      <c:forEach var="row" items="${result.rows}">
-        <input type="checkbox" name="row.userId" value="userId"></input><br/>
-            <td></td>
+        <input type="checkbox" name="row.userId" value="userId"><c:out value="${row.userId}"/></input><br/>
             <td><c:out value="${row.firstName}"/></td>
             <td><c:out value="${row.lastName}"/></td>
             <td><c:out value="${row.userName}"/></td>
