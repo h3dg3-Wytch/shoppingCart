@@ -103,11 +103,11 @@
 <div class="row">
 
     <form action="Admin" method="post">
-    <table>
+     <table>
      <th>User Id</th><th>First Name</th><th>Last Name</th><th>User Name</th><th>Admin</th>
      <c:forEach var="row" items="${result.rows}">
-        <input><tr>
-            <td><c:out value="${row.userId}"/></td>
+        <input type="checkbox" name="row.userId" value="userId"></input><br/>
+            <td></td>
             <td><c:out value="${row.firstName}"/></td>
             <td><c:out value="${row.lastName}"/></td>
             <td><c:out value="${row.userName}"/></td>
@@ -121,9 +121,10 @@
                     </c:if>
                 </c:forEach>
             </td>
-        <form action="Admin" method="post">
+
 
         </tr>
+        </input>
      </c:forEach>
       </table>
 
