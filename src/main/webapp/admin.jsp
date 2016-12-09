@@ -63,7 +63,7 @@
         <li class="active"><a href="">Home</a></li>
         <li><a href="/profile.jsp">Profile</a></li>
         <li><a href="/inventory.jsp">Inventory</a></li>
-        <li><a href="/viewVart">View Cart</a></li>
+        <li><a href="/viewCart.jsp">View Cart</a></li>
         <li><a href="/checkout.jsp">Checkout</a></li>
 
         <%
@@ -136,7 +136,7 @@
         <c:out value="User Name: ${row.userName}"/>
         <c:forEach var="adminRow" items="${admin.rows}">
            <c:if test="${row.userId eq adminRow.userId}">
-                                 <c:out value="Admin: Yes"/>
+              <c:out value="Admin: Yes"/>
             </c:if>
 
         </c:forEach>

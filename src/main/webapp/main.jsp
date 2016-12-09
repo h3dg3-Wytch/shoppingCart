@@ -54,7 +54,7 @@
         <li class="active"><a href="">Home</a></li>
         <li><a href='/profile.jsp'>Profile</a></li>
         <li><a href="/inventory.jsp">Inventory</a></li>
-        <li><a href="/viewVart.jsp">View Cart</a></li>
+        <li><a href="/viewCart.jsp.jsp">View Cart</a></li>
         <li><a href="/checkout.jsp">Checkout</a></li>
 
         <%

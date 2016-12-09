@@ -15,7 +15,7 @@ import java.util.List;
 public class ProductManager extends Manager
 {
 
-    private List<Product> products = new ArrayList<>();
+    private ArrayList<Product> products = new ArrayList<>();
     private DBConnectionManager connectionManager;
 
     public ProductManager(String dbUrl, String dbUser, String dbpassword) throws SQLException, ClassNotFoundException
@@ -135,5 +135,22 @@ public class ProductManager extends Manager
         {
             return false;
         }
+    }
+
+    public Product findProduct(String productId){
+        for (Product product : products) {
+            if(product.getProductId().equals(productId)){
+                return product;
+            }
+        }
+        return null;
+    }
+    public Product findProduct(Product productId){
+        for (Product product : products) {
+            if(product.getProductId().equals(productId.getProductId())){
+                return product;
+            }
+        }
+        return null;
     }
 }

@@ -3,6 +3,7 @@ package com.h3dg3wytch;
 import com.h3dg3wytch.database.AdminManager;
 import com.h3dg3wytch.database.DBConnectionManager;
 import com.h3dg3wytch.database.UserManager;
+import com.h3dg3wytch.models.Cart;
 import com.h3dg3wytch.models.User;
 
 import javax.servlet.RequestDispatcher;
@@ -138,6 +139,7 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
         session.setAttribute("users", userManager.getUsers().values());
+        session.setAttribute("cart", new Cart());
 
         if(admins.contains(user.getUserId())) {
             System.out.print("TRUE");
