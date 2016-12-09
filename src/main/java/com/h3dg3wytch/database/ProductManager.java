@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by h3dg3wytch on 12/7/16.
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 public class ProductManager extends Manager
 {
 
-    private ArrayList<Product> products = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
     private DBConnectionManager connectionManager;
 
     public ProductManager(String dbUrl, String dbUser, String dbpassword) throws SQLException, ClassNotFoundException
@@ -69,6 +70,11 @@ public class ProductManager extends Manager
             return false;
         }
         return true;
+    }
+
+    public List getProducts()
+    {
+        return products;
     }
 
     public boolean addProduct(Product product)

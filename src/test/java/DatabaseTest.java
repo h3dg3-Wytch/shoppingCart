@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 import static java.util.UUID.randomUUID;
@@ -206,5 +207,19 @@ public class DatabaseTest {
 
         assertFalse(expected);
     }
-    
+
+    @Test
+    public void productManagerDeleteProductTest() throws SQLException, ClassNotFoundException
+    {
+        ProductManager productManager = new ProductManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+
+        ArrayList<Product> products = (ArrayList)productManager.getProducts();
+
+        Product product = products.get(0);
+
+        boolean expected = productManager.deleteProduct(product);
+
+        assertTrue(expected);
+    }
+
 }
