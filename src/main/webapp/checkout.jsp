@@ -14,7 +14,7 @@
 	    html, body {
 			height: 100%;
 			width:100%;
-			/*display: flex;*/
+
 		}
 		body {
 	        background: url(images/stockroom.png) no-repeat center center fixed;
@@ -26,39 +26,44 @@
 
 		}
 		.orderDetails{
+			position: relative;
 			width:50%;
+			left:25%;
 			margin-top:30px;
+			margin-bottom:30px;
 			text-align: center;
 			border: 2px #000000 solid;
 			border-radius: 30px;
 			background:rgba(255,255,255,0.3);
-			float:left;
 		}
 		.container{
 			margin-top:30px;
-			width:50%;
+			width:100%;
+			position:relative;
 			display: flex;
-			align-self:center;
-	        flex-flow: row wrap;
-	        justify-content: space-between;
+			justify-content: center;
+			flex-wrap:wrap;
 		}
 		.formDiv {
 			height: auto;
-			padding: 30px;
+			padding: 10px;
 			border: 2px #000000 solid;
 			border-radius: 30px;
 			background:rgba(255,255,255,0.3);
+			margin:10px;
 		}
 		input, select{
 			display:inline-block;
 			float:right;
 			width:auto;
+			
 		}
 		button{
 			width:100%;
 			border-color: black;
 			border-radius:5px;
-			padding-top,padding-bottom: 5px;
+			padding-top:5px;
+			padding-bottom: 5px;
 			margin-top:10px;
 			background:rgba(0,0,0,0.3);
 			font-size: 14px;
@@ -147,7 +152,7 @@
 	        <p id = "zipCodeError" style="color:red;"></p>
 	        
 	        City*: <input type="text" id = "city" name="city">
-	        <p id = "cityError" style="color:red;"></p><br>
+	        <p id = "cityError" style="color:red;"></p>
 	        State:<select>
 		         <option value="AL">Alabama</option>
 		         <option value="AK">Alaska</option>
@@ -202,11 +207,9 @@
 	           <option value="WY">Wyoming</option>
 	         </select>
 	         <br>
-	         <br>
-
-	        
+	         <br>	        
 	        Email*: <input type="text" id = "email" name="email">
-	        <p id = "emailError" style="color:red;"></p><br>
+	        <p id = "emailError" style="color:red;"></p>
 	        Phone: <input type="text" id = "phone" name="phone"><br>
 	      </form>
 	    </div>
