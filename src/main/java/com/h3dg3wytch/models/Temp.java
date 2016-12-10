@@ -57,8 +57,6 @@ public class Temp extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        PrintWriter out = resp.getWriter();
-        out.print(HTML_START);
         HttpSession session = req.getSession();
         Cart cart = (Cart) session.getAttribute("cart");
         String productId = getIdFromURLQuery(req.getQueryString());
@@ -66,17 +64,30 @@ public class Temp extends HttpServlet {
         ProductManager productManager = null;
 
         try {
-            productManager = new ProductManager(getServletContext().getInitParameter("dbURL"),getServletContext().getInitParameter("dbUser"),getServletContext().getInitParameter("dbPassword") );
-            ArrayList<Product> products = productManager.getProducts();
-            for (Product product : products) {
-                out.print("<p>" + product + "</p>");
+            productManager = new ProductManager(getServletContext().getInitParameter("dbURL"),
+                    getServletContext().getInitParameter("dbUser"),
+                    getServletContext().getInitParameter("dbUserPwd")
+            );
+
+            Product product = productManager.findProduct(productId);
+            if(product != null){
+                cart.addToCart(product);
             }
+
+            session.setAttribute("cart", cart);
+
         } catch (SQLException e) {
             e.printStackTrace();
-            out.print("<p>BAD SQL</p>");
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            out.print("<p>BAD CLASS</p>");
+
+        }finally {
+            try {
+                productManager.getDbConnectionManager().getConnection().close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
 //        if(product != null) {
@@ -85,8 +96,8 @@ public class Temp extends HttpServlet {
 //        session.setAttribute("cart", cart);
 
 
-        out.print(HTML_END);
-        //resp.sendRedirect("inventory.jsp");
+
+        resp.sendRedirect("viewCart.jsp");
 
     }
 

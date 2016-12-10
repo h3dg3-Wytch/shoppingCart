@@ -17,12 +17,12 @@ public class ProductManager extends Manager
 {
 
     private ArrayList<Product> products = new ArrayList<>();
-    private DBConnectionManager connectionManager;
+
 
     public ProductManager(String dbUrl, String dbUser, String dbpassword) throws SQLException, ClassNotFoundException
     {
         super(dbUrl, dbUser, dbpassword);
-        connectionManager = new DBConnectionManager(dbUrl, dbUser, dbpassword);
+
         get();
     }
 
@@ -43,7 +43,6 @@ public class ProductManager extends Manager
     {
 
         Connection connection = null;
-
         Statement statement = null;
         try
         {
@@ -84,7 +83,7 @@ public class ProductManager extends Manager
         {
             try
             {
-                Connection connection = connectionManager.getConnection();
+                Connection connection = dbConnectionManager.getConnection();
                 Statement statement = connection.createStatement();
                 System.out.println("this is some shit " + product.getProductId());
 
@@ -115,7 +114,7 @@ public class ProductManager extends Manager
         {
             try
             {
-                Connection connection = connectionManager.getConnection();
+                Connection connection = dbConnectionManager.getConnection();
                 Statement statement = connection.createStatement();
 
                 String sql = "DELETE from product WHERE productId = '"+product.getProductId()+"'";

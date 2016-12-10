@@ -54,7 +54,7 @@
         <li class="active"><a href="">Home</a></li>
         <li><a href='Profile'>Profile</a></li>
         <li><a href="/inventory.jsp">Inventory</a></li>
-        <li><a href="/viewCart.jsp.jsp">View Cart</a></li>
+        <li><a href="/viewCart.jsp">View Cart</a></li>
         <li><a href="/checkout.jsp">Checkout</a></li>
 
         <%
@@ -67,7 +67,7 @@
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
       </ul>
     </div>
   </div>

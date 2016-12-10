@@ -128,7 +128,6 @@
             <img src=<c:out value="${order.imageUrl}"/> />
             <h2>Product Name: <c:out value="${order.productName}"/></h2>
             <h2>Product Price: <c:out value="${order.productPrice}"/></h2>
-
         </div>
         </c:forEach>
 

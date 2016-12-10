@@ -236,8 +236,11 @@ public class DatabaseTest {
     }
 
     @Test
-    public void productManager(){
-        ProductManager pro
+    public void productManager() throws SQLException, ClassNotFoundException {
+        ProductManager productManager = new ProductManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+        for (Product o : productManager.getProducts()) {
+            System.out.println(o);
+        }
     }
  
 }
