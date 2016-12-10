@@ -1,5 +1,7 @@
-package com.h3dg3wytch.database;
+package com.h3dg3wytch;
 
+import com.h3dg3wytch.database.OrderManager;
+import com.h3dg3wytch.database.ProductManager;
 import com.h3dg3wytch.models.Order;
 import com.h3dg3wytch.models.Product;
 import com.h3dg3wytch.models.User;

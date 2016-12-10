@@ -1,6 +1,8 @@
-package com.h3dg3wytch.models;
+package com.h3dg3wytch;
 
 import com.h3dg3wytch.database.ProductManager;
+import com.h3dg3wytch.models.Cart;
+import com.h3dg3wytch.models.Product;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
