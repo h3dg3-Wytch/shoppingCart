@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
@@ -55,30 +56,37 @@ public class Temp extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        PrintWriter out = resp.getWriter();
+        out.print(HTML_START);
         HttpSession session = req.getSession();
         Cart cart = (Cart) session.getAttribute("cart");
+        String productId = getIdFromURLQuery(req.getQueryString());
 
         ProductManager productManager = null;
 
         try {
             productManager = new ProductManager(getServletContext().getInitParameter("dbURL"),getServletContext().getInitParameter("dbUser"),getServletContext().getInitParameter("dbPassword") );
+            ArrayList<Product> products = productManager.getProducts();
+            for (Product product : products) {
+                out.print("<p>" + product + "</p>");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
+            out.print("<p>BAD SQL</p>");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            out.print("<p>BAD CLASS</p>");
         }
-        Product product = productManager.findProduct(getIdFromURLQuery(req.getQueryString()));
 
-        if(product != null) {
-            cart.addToCart(product);
-        }
-        session.setAttribute("cart", cart);
-        try {
-            productManager.getDbConnectionManager().getConnection().close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        resp.sendRedirect("inventory.jsp");
+//        if(product != null) {
+//            cart.addToCart(product);
+//        }
+//        session.setAttribute("cart", cart);
+
+
+        out.print(HTML_END);
+        //resp.sendRedirect("inventory.jsp");
 
     }
 

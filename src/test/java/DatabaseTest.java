@@ -10,10 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import static java.util.UUID.randomUUID;
 import static junit.framework.TestCase.assertFalse;
@@ -223,5 +220,24 @@ public class DatabaseTest {
 //        assertTrue(expected);
 //    }
 
+
+    @Test
+    public void orderManagerTest() throws SQLException, ClassNotFoundException {
+
+        OrderManager orderManager = new OrderManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+
+        HashMap<Integer, Order> orders = orderManager.getOrders();
+
+        for (Integer i : orders.keySet()) {
+
+            System.out.println(orders.get(i));
+
+        }
+    }
+
+    @Test
+    public void productManager(){
+        ProductManager pro
+    }
  
 }

@@ -11,7 +11,7 @@ public class Product {
     private String productName;
     private double productPrice;
     private String imageUrl;
-    private String productDescription = "";
+    private String productDescription;
 
 
     @Override

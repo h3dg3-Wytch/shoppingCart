@@ -34,4 +34,9 @@ public class Order
     {
         return userId;
     }
+
+    @Override
+    public String toString() {
+        return "OrderId: " + orderId + " UserId: " + userId + " ProductId: " + productId;
+    }
 }

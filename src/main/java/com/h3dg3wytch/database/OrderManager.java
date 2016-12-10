@@ -14,12 +14,12 @@ import java.util.HashMap;
  */
 public class OrderManager extends Manager
 {
-    private DBConnectionManager connectionManager;
     private HashMap<Integer, Order> orders = new HashMap<>();
 
     public OrderManager(String dbUrl, String dbUser, String dbpassword) throws SQLException, ClassNotFoundException
     {
         super(dbUrl, dbUser, dbpassword);
+        get();
     }
 
 
@@ -43,7 +43,7 @@ public class OrderManager extends Manager
         Statement statement = null;
         try
         {
-            connection = connectionManager.getConnection();
+            connection = dbConnectionManager.getConnection();
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM orders");
 
@@ -79,7 +79,7 @@ public class OrderManager extends Manager
         {
             try
             {
-                Connection connection = connectionManager.getConnection();
+                Connection connection = dbConnectionManager.getConnection();
                 Statement statement = connection.createStatement();
 
                 String userId = order.getUserId();

@@ -2,6 +2,7 @@ package com.h3dg3wytch.database;
 
 import com.h3dg3wytch.models.Product;
 
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -72,7 +73,7 @@ public class ProductManager extends Manager
         return true;
     }
 
-    public List getProducts()
+    public ArrayList<Product> getProducts()
     {
         return products;
     }

@@ -100,7 +100,7 @@
       user="developer"  password="password"/>
 
  <sql:query dataSource="${snapshot}" sql="SELECT * FROM user;" var="result" />
-  <sql:query dataSource="${snapshot}" sql="SELECT * FROM admins;" var="admin" />
+ <sql:query dataSource="${snapshot}" sql="SELECT * FROM admins;" var="admin" />
 
 
 <div class="row">
