@@ -97,10 +97,11 @@
 
 <div class="col-md-6 offset-md-3">
 
-<form action="Checkout" method="post">
+<form action="/Checkout" method="post">
  <c:forEach var="products" items="${cart.products}">
-    <input type="radio" name="product" value=<c:out value="${products.productId}"/>>Product Name: <c:out value="${products.productName}"/> Product Price <c:out value="${products.productPrice}"/></input>
+    <input type="radio" name="productInCart" value=<c:out value="${products.productId}"/>> Product Name: <c:out value="${products.productName}"/> Product Price <c:out value="${products.productPrice}"/><br/>
  </c:forEach>
+ <input
  <input type="submit" name="checkout" value="Checkout"/>
  <input type="submit" name="remove" value="Remove Item"/>
 </form>

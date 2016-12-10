@@ -31,7 +31,8 @@ public class Checkout extends HttpServlet {
         out.println(HTML_START);
 
         HttpSession session = req.getSession();
-        String productId = (String) session.getAttribute("product");
+        String productId = (String) req.getParameter("productInCart");
+
         Cart cart = (Cart) session.getAttribute("cart");
 
         if (req.getParameter("checkout") != null) {
@@ -41,6 +42,8 @@ public class Checkout extends HttpServlet {
             session.setAttribute("cart", cart);
             resp.sendRedirect("/viewCart.jsp");
         }
+
+        out.println(HTML_START);
     }
 
 }

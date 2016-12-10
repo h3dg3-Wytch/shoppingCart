@@ -242,5 +242,14 @@ public class DatabaseTest {
             System.out.println(o);
         }
     }
+
+    @Test
+    public void addToCart() throws SQLException, ClassCastException{
+        Cart cart = new Cart();
+        Product product = new Product();
+        cart.addToCart(product);
+        cart.removeFromCart(product.getProductId());
+
+    }
  
 }

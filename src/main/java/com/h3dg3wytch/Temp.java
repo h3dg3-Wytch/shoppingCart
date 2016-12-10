@@ -92,12 +92,6 @@ public class Temp extends HttpServlet {
             }
         }
 
-//        if(product != null) {
-//            cart.addToCart(product);
-//        }
-//        session.setAttribute("cart", cart);
-
-
 
         resp.sendRedirect("viewCart.jsp");
 
