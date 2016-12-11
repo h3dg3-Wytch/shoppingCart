@@ -72,10 +72,10 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="">Home</a></li>
+        <li><a href="">Home</a></li>
         <li><a href="Profile">Profile</a></li>
         <li><a href="/inventory.jsp">Inventory</a></li>
-        <li><a href="/viewCart.jsp">View Cart</a></li>
+        <li class="active"><a href="/viewCart.jsp">View Cart</a></li>
         <li><a href="/checkout.jsp">Checkout</a></li>
 
         <%

@@ -60,7 +60,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="">Home</a></li>
+        <li><a href="">Home</a></li>
         <li><a href="Profile">Profile</a></li>
         <li><a href="/inventory.jsp">Inventory</a></li>
         <li><a href="/viewCart.jsp">View Cart</a></li>
@@ -69,7 +69,7 @@
         <%
             String adminTag = "";
             if(session.getAttribute("admin").equals("true")){
-                adminTag ="<li><a href='/admin.jsp'>Admin</a></li>";
+                adminTag ="<li class="active"><a href='/admin.jsp'>Admin</a></li>";
             }
         %>
         <%= adminTag %>
