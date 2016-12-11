@@ -114,7 +114,7 @@
     if(session.getAttribute("doubleAdminError") != null){
         booleanString = (String) session.getAttribute("doubleAdminError");
         if(booleanString.equals("true")){
-            error ="User is already and admin!";
+            error ="User is already an admin!";
         }
     }
  %>
