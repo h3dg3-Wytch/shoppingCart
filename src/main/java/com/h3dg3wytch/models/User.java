@@ -70,7 +70,7 @@ public class User {
 
     @Override
     public String toString(){
-        return " FirstName: " + firstName+  " LastName:" + lastName + " UserName " + userName+ " UserID: " + userId;
+        return " FirstName: " + firstName+  " LastName:" + lastName + " UserName " + userName+ " UserID: " + userId +" Password: " + password;
     }
 
     public String getUserId() {

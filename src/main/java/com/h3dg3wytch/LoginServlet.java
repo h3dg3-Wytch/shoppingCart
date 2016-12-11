@@ -61,61 +61,7 @@ public class LoginServlet extends HttpServlet {
 
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, IOException {
 
-        PrintWriter out = response.getWriter();
-        out.print(HTML_START);
-        Connection connection = null;
-        Statement statement = null;
-
-        try {
-            connectionManager = new DBConnectionManager(getServletContext().getInitParameter("dbURL"),
-                    getServletContext().getInitParameter("dbUser"),
-                    getServletContext().getInitParameter("dbUserPwd"));
-            connection = connectionManager.getConnection();
-            if(connection == null)
-                out.print("<p>Null Error</p>");
-
-            statement = connection.createStatement();
-            String sql = "SELECT * FROM user";
-            ResultSet resultSet = statement.executeQuery(sql);
-
-            while(resultSet.next()){
-                String first = resultSet.getString("firstName");
-                String last = resultSet.getString("lastName");
-                String userName = resultSet.getString("userName");
-                String password = resultSet.getString("password");
-                out.println("<p> First: " + first + "</p>");
-                out.println("<p> Last: " + last + "</p>");
-                out.println("<p> UserName: " + userName + "</p>");
-                out.println("<p> password: " + password + "</p>");
-            }
-
-
-        } catch (ClassNotFoundException e) {
-            out.print("<p>Class Error</p>");
-            e.printStackTrace();
-        } catch (SQLException e) {
-            out.print("<p>SQL Error</p>");
-            out.print("<p>" + e.getMessage() + " " + e.getSQLState() + "</p>");
-        }finally {
-            try {
-                statement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            try{
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        out.print(HTML_END);
-
-        //Make sure to close the
-
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -123,12 +69,10 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         User user = userManager.findUserByNameAndPassword(userName, password);
+
         if(user != null){
-            //resp.sendRedirect("main.jsp");
-
-           createSession(user, req, resp);
+            createSession(user, req, resp);
             resp.sendRedirect("main.jsp");
-
         }else{
            resp.sendRedirect("login.jsp");
         }

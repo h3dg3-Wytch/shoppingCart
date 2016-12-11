@@ -235,21 +235,35 @@ public class DatabaseTest {
         }
     }
 
-    @Test
-    public void productManager() throws SQLException, ClassNotFoundException {
-        ProductManager productManager = new ProductManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
-        for (Product o : productManager.getProducts()) {
-            System.out.println(o);
-        }
-    }
-
-    @Test
-    public void addToCart() throws SQLException, ClassCastException{
-        Cart cart = new Cart();
-        Product product = new Product();
-        cart.addToCart(product);
-        cart.removeFromCart(product.getProductId());
-
-    }
- 
+//    @Test
+//    public void productManager() throws SQLException, ClassNotFoundException {
+//        ProductManager productManager = new ProductManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+//        for (Product o : productManager.getProducts()) {
+//            System.out.println(o);
+//        }
+//    }
+//
+//    @Test
+//    public void addToCart() throws SQLException, ClassCastException{
+//        Cart cart = new Cart();
+//        Product product = new Product();
+//        cart.addToCart(product);
+//        cart.removeFromCart(product.getProductId());
+//
+//    }
+//
+//    @Test
+//    public void us() throws SQLException, ClassNotFoundException {
+//        UserManager userManager = new UserManager("jdbc:mysql://localhost/shoppingCart", "developer", "password");
+//
+//        for(String string : userManager.getUsers().keySet()){
+//           User u =  userManager.getUsers().get(string);
+//            if(u.getPassword().equals("password ") && u.getUserName().equals("vthomas")){
+//                System.out.println(u);
+//            }
+//
+//
+//        }
+//    }
+// 
 }

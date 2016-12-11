@@ -67,7 +67,7 @@ public class UserManager {
                 Connection connection = connectionManager.getConnection();
                 Statement statement = connection.createStatement();
                 //String sql = "INSERT INTO user (firstName, lastName, userId, userName, password) VALUES ("+ user.getUserName()+", "+user.getLastName()+"," +user.getUserId()+", "+user.getUserName()+", "+ user.getPassword()+")";
-                String sql = "INSERT INTO user VALUES (" + "'" + user.getFirstName()+ "', '" + user.getLastName() + "','" +user.getUserId() + "','" + user.getUserName() +  "','" + user.getPassword()+ " ')";
+                String sql = "INSERT INTO user VALUES (" + "'" + user.getFirstName()+ "', '" + user.getLastName() + "','" +user.getUserId() + "','" + user.getUserName() +  "','" + user.getPassword()+ "')";
 
                     statement.executeUpdate(sql);
             } catch (SQLException e) {
@@ -82,7 +82,6 @@ public class UserManager {
         return users.get(userId);
     }
 
-    //todo return specific user in database
     public User findUserByNameAndPassword(String username, String password){
         for(User user: users.values()){
             if(user.getUserName().equals(username) && user.getPassword().equals(password))

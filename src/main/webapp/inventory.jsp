@@ -24,7 +24,7 @@
           -o-background-size: cover;
           background-size: cover;
     }
-    
+
     .navbar {
       margin-bottom: 0;
       border-radius: 0;

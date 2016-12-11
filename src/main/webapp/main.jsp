@@ -148,7 +148,22 @@
     <div class="col-sm-8">
       <h3>Fine Products, Better Deals</h3>
 
-      <p>Oh boy, I love to make deals? What is the deal with that, haha. How do you deal with these great deals?    </p>
+      <p>Oh boy, I love to make deals? What is the deal with that, haha. How do you deal with these great deals?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sodales arcu ac magna consectetur consequat.
+      Aenean nec rhoncus elit. Cras varius iaculis efficitur. Nulla et massa orci. Vestibulum ornare nisl non purus semper,
+       ut mollis odio ullamcorper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+       Cras facilisis orci at elit venenatis, sit amet luctus ipsum scelerisque.</P>
+
+       <p>Vivamus metus turpis, suscipit at feugiat a, finibus vel sapien.
+       Pellentesque diam magna, laoreet id pharetra et, auctor vitae est.
+       Integer non ligula egestas, pharetra sapien et, faucibus eros.
+       Cras nec orci pretium ante dictum vestibulum. In ullamcorper enim in justo imperdiet,
+        faucibus tristique metus semper. Etiam suscipit in enim sit amet facilisis.
+        Integer non ullamcorper sapien, et viverra augue. Proin pellentesque sapien lectus,
+        sed imperdiet nisi ultricies non. Donec eu sollicitudin ante. Aenean et orci ornare,
+        lobortis turpis ut, viverra justo. Curabitur imperdiet tempor arcu, nec vulputate nibh
+         faucibus sed. Aliquam non hendrerit est, at sagittis libero. Quisque eget quam
+          in dolor rhoncus scelerisque.</p>
     </div>
 
   </div>
