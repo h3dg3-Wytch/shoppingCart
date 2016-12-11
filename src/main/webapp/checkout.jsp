@@ -1,14 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=US-ASCII"
     pageEncoding="US-ASCII"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+    <%@ taglib prefix="x" uri="http://java.sun.com/jstl/xml" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+    <%@ taglib prefix="sql" uri="http://java.sun.com/jstl/sql" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
   	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src = "js/checkout.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/checkout.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
 	    html, body {
@@ -132,8 +138,24 @@
 	
     <div class = "orderDetails">
       <h2>Order Details</h2>
-      <p>This is where the items and total price will go... well at least the total price has to be somewhere</p>
+      <c:set var="totalCost" scope="session" value="0"/>
+      <c:forEach var="products" items="${cart.products}">
+         <p>Product Name: <c:out value="${products.productName}"/>...................... Product Price:  $<c:out value="${products.productPrice}"/></p>
+         <c:set var="totalCost" scope="session" value="${totalCost + products.productPrice}"/>
+       </c:forEach>
+       <c:choose>
+        <c:when test="${totalCost == 0}">
+            <p>No items in the cart currently. BUY. BUY. BUY.<p>
+        </c:when>
+         <c:when test="${totalCost != 0}">
+            <p>Total Cost......................$<c:out value="${totalCost}"/> </p>
+         </c:when>
+        </c:choose>
    	</div>
+
+
+
+
 	<div class = "container">
 	    <div class = "formDiv">
 	      <h2>Shipping Information</h2>
@@ -253,7 +275,7 @@
 	        </select><br>
 	        <p id = "securityCodeError" style="color:red;"></p>
 	        Security Code*: <input type="text" id = "securityCode" name="securityCode"><br><br>
-	        <button type="button"onclick="validateForm(this.form)">Submit</button>
+	        <button type="button" name="purchase" onclick="validateForm(this.form)">Submit</button>
 	      </form>
 	      <br>
 	      <div>

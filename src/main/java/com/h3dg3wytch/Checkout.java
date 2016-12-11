@@ -1,8 +1,11 @@
 package com.h3dg3wytch;
 
+import com.h3dg3wytch.database.OrderManager;
 import com.h3dg3wytch.database.ProductManager;
 import com.h3dg3wytch.models.Cart;
+import com.h3dg3wytch.models.Order;
 import com.h3dg3wytch.models.Product;
+import com.h3dg3wytch.models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,20 +33,49 @@ public class Checkout extends HttpServlet {
         PrintWriter out = resp.getWriter();
         out.println(HTML_START);
 
+        OrderManager orderManager = null;
+
         HttpSession session = req.getSession();
         String productId = (String) req.getParameter("productInCart");
+
+        out.print("Inside Checkout");
 
         Cart cart = (Cart) session.getAttribute("cart");
 
         if (req.getParameter("checkout") != null) {
             resp.sendRedirect("/checkout.jsp");
-        } else if (req.getParameter("remove") != null) {
+        }else if (req.getParameter("remove") != null) {
             cart.removeFromCart(productId);
             session.setAttribute("cart", cart);
             resp.sendRedirect("/viewCart.jsp");
-        }
+        }else if(req.getParameter("purchase") != null){
 
-        out.println(HTML_START);
+           if(cart.getProducts().size() == 0){
+               resp.sendRedirect("/checkout.jsp");
+           }
+
+            User user = (User) session.getAttribute("user");
+
+            try {
+                orderManager= new OrderManager(getServletContext().getInitParameter("dbURL"),
+                       getServletContext().getInitParameter("dbUser"),
+                       getServletContext().getInitParameter("dbUserPwd"));
+
+                for(Product product : cart.getProducts()){
+                    Order order = new Order(product.getProductId(), user.getUserId());
+                    orderManager.addOrder(order);
+                }
+                resp.sendRedirect("/Profile");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+        out.println(HTML_END);
     }
+
 
 }
