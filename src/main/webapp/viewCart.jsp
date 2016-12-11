@@ -49,9 +49,9 @@
     }
 
     #cartSection{
-        width: 100%;
+        width: 500px;
         height: 100%;
-        background-color: red;
+        background-color: grey;
     }
   }
   </style>
@@ -99,7 +99,7 @@
 
 <div class="row">
 
-<div id="cartSection" class="col-md-6 col-md-offset-3">
+<div id="cartSection" class="col-sm-6 col-sm-offset-3">
 <form action="/Checkout" method="post">
  <c:forEach var="products" items="${cart.products}">
     <input type="radio" name="productInCart" value=<c:out value="${products.productId}"/>> Product Name: <c:out value="${products.productName}"/> Product Price <c:out value="${products.productPrice}"/><br/>
