@@ -94,7 +94,7 @@
     </div>
   </nav>
   <div class="container">
-      <form action="Temp" method="get">
+      <form action="AddToCart" method="get">
       <div class='row'>
       <c:forEach varStatus="loop" var="row" items="${productResult.rows}">
           <c:if test="${ loop.index % 3 == 0 }">

@@ -22,8 +22,8 @@ import java.util.Map;
  * Created by h3dg3wytch on 12/9/16.
  */
 
-@WebServlet(description = "Temp Page", urlPatterns = {"/Temp"})
-public class Temp extends HttpServlet {
+@WebServlet(description = "Temp Page", urlPatterns = {"/AddToCart"})
+public class AddToCart extends HttpServlet {
 
     public static final String HTML_START="<html><body>";
     public static final String HTML_END="</body></html>";
