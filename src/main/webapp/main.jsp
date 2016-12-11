@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=US-ASCII"
     pageEncoding="US-ASCII"%>
 <%@page import="com.h3dg3wytch.models.User"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="x" uri="http://java.sun.com/jstl/xml" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jstl/sql" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -39,6 +44,10 @@
 </head>
 <body>
 
+<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
+               url="jdbc:mysql://localhost/shoppingCart"
+               user="developer"  password="password"/>
+<sql:query dataSource="${snapshot}" sql="SELECT * FROM admins;" var="adminResult" />
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -47,27 +56,23 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Logo</a>
+      ""
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="">Home</a></li>
+        <li class="active"><a href="main.jsp">Home</a></li>
         <li><a href='Profile'>Profile</a></li>
         <li><a href="/inventory.jsp">Inventory</a></li>
         <li><a href="/viewCart.jsp">View Cart</a></li>
         <li><a href="/checkout.jsp">Checkout</a></li>
-
-        <%
-            String adminTag = "";
-            if(session.getAttribute("admin").equals("true")){
-                adminTag ="<li><a href=\"admin.jsp\">Admin</a></li>";
-            }
-        %>
-        <%= adminTag %>
-
+        <c:forEach var="resultRow" items="${adminResult.rows}">
+                    <c:if test="${resultRow.userId == user.userId}">
+                        <li><a href="/admin.jsp">Admin</a></li>
+                    </c:if>
+         </c:forEach>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
+        <li><a href="/login.jsp"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
       </ul>
     </div>
   </div>
@@ -78,25 +83,34 @@
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
     </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img src="https://placehold.it/1200x400?text=IMAGE" alt="Image">
+        <img style="width:500px; height: 500px;" src="images/deals.png" alt="Image">
         <div class="carousel-caption">
-          <h3>Sell $</h3>
-          <p>Money Money.</p>
+          <h3 style="color: black">DEALS, DEALS, DEALS</h3>
+          <p style="color: black">Give me your money</p>
         </div>
       </div>
 
       <div class="item">
-        <img src="https://placehold.it/1200x400?text=Another Image Maybe" alt="Image">
+        <img style="width:500px; height: 500px;"src="images/bigdeal.png" alt="Image">
         <div class="carousel-caption">
-          <h3>More Sell $</h3>
-          <p>Lorem ipsum...</p>
+          <h3 style="color: black">Ha ha CAPITALISM</h3>
+          <p style="color: black">We want your money, honey!</p>
         </div>
       </div>
+
+       <div class="item">
+              <img style="width:500px; height: 500px;" src="images/hot.png" alt="Image">
+              <div class="carousel-caption">
+                <h3 style="color: black">We love Dinero</h3>
+                <p style="color: black">Pure Cheddar</p>
+              </div>
+            </div>
     </div>
 
     <!-- Left and right controls -->
@@ -111,6 +125,7 @@
 </div>
 
 <div class="container text-center">
+
   <%
   User user = null;
   String userName = null;
@@ -121,32 +136,26 @@
       userName = user.getFirstName();
   }
   %>
-  <h3>Hi <%=userName %>, Login successful.</h3>
-  <br>
-  User=<%=user %>
-  <br>
+  <h3>Hi <%=userName %>, Login successful.</h3><br/>
+  <hr>
+
+
   <div class="row">
     <div class="col-sm-4">
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      <p>Current Project</p>
+      <img src="images/person.jpg" class="img-responsive" style="width:100%" alt="Image">
+      <p>Trust me</p>
     </div>
-    <div class="col-sm-4">
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      <p>Project 2</p>
+    <div class="col-sm-8">
+      <h3>Fine Products, Better Deals</h3>
+
+      <p>Oh boy, I love to make deals? What is the deal with that, haha. How do you deal with these great deals?    </p>
     </div>
-    <div class="col-sm-4">
-      <div class="well">
-       <p>Some text..</p>
-      </div>
-      <div class="well">
-       <p>Some text..</p>
-      </div>
-    </div>
+
   </div>
 </div><br>
 
-<footer class="container-fluid text-center">
-  <p>Footer Text</p>
+<footer style="background-color: #504A4B" class="container-fluid text-center">
+  <p></p>
 </footer>
 
 </body>

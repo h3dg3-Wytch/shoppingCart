@@ -26,8 +26,8 @@ import java.util.Map;
 @WebServlet(description = "Admin Page", urlPatterns = {"/Admin"})
 public class Admin extends HttpServlet {
 
-    public static final String HTML_START="<html><body>";
-    public static final String HTML_END="</body></html>";
+        public static final String HTML_START="<html><body>";
+        public static final String HTML_END="</body></html>";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

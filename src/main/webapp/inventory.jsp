@@ -24,14 +24,12 @@
           -o-background-size: cover;
           background-size: cover;
     }
-    /* Remove the navbar's default margin-bottom and rounded borders */
+    
     .navbar {
       margin-bottom: 0;
       border-radius: 0;
     }
 
-
-    /* Add a gray background color and some padding to the footer */
     footer {
       background-color: #f2f2f2;
       padding: 25px;
@@ -64,6 +62,8 @@
 
    <sql:query dataSource="${snapshot}" sql="SELECT * FROM product;" var="productResult" />
 
+   <sql:query dataSource="${snapshot}" sql="SELECT * FROM admins;" var="adminResult" />
+
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -72,24 +72,23 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Logo</a>
+
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li><a href="">Home</a></li>
+          <li><a href="main.jsp">Home</a></li>
           <li><a href="Profile">Profile</a></li>
           <li class="active"><a href="/inventory.jsp">Inventory</a></li>
           <li><a href="/viewCart.jsp">View Cart</a></li>
           <li><a href="/checkout.jsp">Checkout</a></li>
-
-          <%
-              String adminTag = "";
-              if(session.getAttribute("admin").equals("true")){
-                  adminTag ="<li><a href='/admin.jsp'>Admin</a></li>";
-              }
-          %>
-          <%= adminTag %>
-
+            <c:forEach var="resultRow" items="${adminResult.rows}">
+                                <c:if test="${resultRow.userId == user.userId}">
+                                    <li><a href="/admin.jsp">Admin</a></li>
+                                </c:if>
+             </c:forEach>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+                <li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span>  Logout</a></li>
         </ul>
       </div>
     </div>
@@ -104,7 +103,7 @@
           </c:if>
            <div class="col-sm-4">
                   <div class="panel panel-primary ">
-                      <div class="panel-heading"><c:out value="${row.productName}"/></div>
+                      <div style="background-color: #504A4B;"class="panel-heading"><c:out value="${row.productName}"/></div>
                       <div class="panel-body"><img style="width:100%; height:100%" src=<c:out value="${row.productImageUrl}"/> class="img-responsive" style="width:100%" alt="Image"></div>
                       <div class="panel-footer"><button name="purchase" value=<c:out value="${row.productId}"/> style="width:100%; height:20px;" type="submit">Purchase!</button></div>
                   </div>

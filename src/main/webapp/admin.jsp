@@ -48,6 +48,13 @@
 </head>
 <body>
 
+<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
+      url="jdbc:mysql://localhost/shoppingCart"
+      user="developer"  password="password"/>
+
+<sql:query dataSource="${snapshot}" sql="SELECT * FROM admins;" var="adminResult" />
+
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -56,27 +63,23 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Logo</a>
+
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="">Home</a></li>
+        <li><a href="main.jsp">Home</a></li>
         <li><a href="Profile">Profile</a></li>
         <li><a href="/inventory.jsp">Inventory</a></li>
         <li><a href="/viewCart.jsp">View Cart</a></li>
         <li><a href="/checkout.jsp">Checkout</a></li>
-
-        <%
-            String adminTag = "";
-            if(session.getAttribute("admin").equals("true")){
-                adminTag ="<li class="active"><a href='/admin.jsp'>Admin</a></li>";
-            }
-        %>
-        <%= adminTag %>
-
+        <c:forEach var="resultRow" items="${adminResult.rows}">
+                            <c:if test="${resultRow.userId == user.userId}">
+                                <li><a href="/admin.jsp">Admin</a></li>
+                            </c:if>
+        </c:forEach>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span>  Logout</a></li>
       </ul>
     </div>
   </div>
@@ -156,7 +159,7 @@
 </div><br>
 
 <footer class="container-fluid text-center">
-  <p>Footer Text</p>
+  <p></p>
 </footer>
 
 </body>
